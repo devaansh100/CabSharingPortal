@@ -154,9 +154,7 @@ public class BookingPage implements BookingFeatures {
                     int n = Integer.parseInt(sc.nextLine());
                     notification = notifications.get(n - 1);
                     if (!notification.isInteractable()) {
-                        new IllegalActionOnNotification("Invalid notification - nothing to interact!");
-                        checkNotifications(actor);
-                        break;
+                        throw new IllegalActionOnNotification("Invalid notification - nothing to interact!");
                     }
                     Booking b = notification.getBooking();
                     System.out.println("1 to accept, 0 to reject");
@@ -165,11 +163,19 @@ public class BookingPage implements BookingFeatures {
                         b.acceptPassenger(actor);
                         System.out.println("Trip was accepted!");
                     } else {
-                        b.removePassengers(actor);
-                        actor.removeBooking(b);
+                        b.rejectPassenger(actor);
                         System.out.println("Trip was rejected!");
                     }
-                    actor.removeNotifications(notification);
+                    actor.removeNotifications(notification); // Removing current interacted notification
+                    ArrayList<Notification> notificationsToRemove = new ArrayList<>(); // Removing notifications which required the same interaction
+                    for(Notification notif : actor.getNotifications()){
+                        if(notif.getBooking() == b){
+                            notificationsToRemove.add(notif);
+                        }
+                    }
+                    for(Notification notif : notificationsToRemove){
+                        actor.removeNotifications(notif);
+                    }
                     break;
                 case 2:
                     System.out.println("Choose serial number of the notification to delete");
@@ -178,7 +184,7 @@ public class BookingPage implements BookingFeatures {
                     if (!notification.isInteractable())
                         actor.removeNotifications(notification);
                     else
-                        new IllegalActionOnNotification("Cannot delete notification since you have not interacted with it");
+                        throw new IllegalActionOnNotification("Cannot delete notification since you have not interacted with it");
                     break;
             }
         }

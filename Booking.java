@@ -25,6 +25,7 @@ public class Booking {
         this.status = false;
         this.paid = false;
         this.cabSharing = true;
+        this.bookingId = BookingDb.getBookingNumber();
     }
     public String toString() {
         String repr = bookingId + ": Trip from " + src + " to " + dest + " in " + car + " on " + day + "/" + month + " at " + hours + ":" + mins +
@@ -91,7 +92,7 @@ public class Booking {
     }
 
     public void addPassengers(Student passenger) {
-        if(!this.passengers.contains(passenger)) {
+        if(!this.passengers.contains(passenger) && this.emptySeats > 0) {
             this.passengers.add(passenger);
             this.accepted.add(true);
             this.emptySeats--;
@@ -109,7 +110,17 @@ public class Booking {
 
     public void acceptPassenger(Student passenger){
         this.accepted.set(this.passengers.indexOf(passenger), true);
+        for(Student s : getPassengers()){
+            if(s != passenger){
+                s.addNotifications(new Notification("Trip " + getBookingId() + ": " + s.getName() + " has accepted the trip."));
+            }
+        }
         this.updateStatus();
+    }
+
+    public void rejectPassenger(Student passenger){
+        this.removePassengers(passenger);
+        passenger.removeBooking(this);
     }
 
     private void updateStatus(){
@@ -138,10 +149,7 @@ public class Booking {
         this.passengers.remove(passenger);
         this.emptySeats++;
         for(Student s : this.passengers){
-            if(s != passenger){
-                s.addNotifications(new Notification(passenger.getName() + " has left the trip " + this.bookingId+
-                        ", " + passenger.getId() + ". Reach out to them at " + passenger.getEmail() + " or " + passenger.getContactNumber()));
-            }
+            s.addNotifications(new Notification("Trip " + getBookingId() + ": " + s.getName() + " has rejected the trip."));
         }
         if(this.passengers.size() == 0){
             BookingDb.removeBooking(this);

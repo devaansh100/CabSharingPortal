@@ -13,8 +13,6 @@ public class Student {
         this.bookings = new HashSet<>();
         this.dues = 0;
     }
-
-    @Override
     public String toString() {
         return   "\nName: " + name +
                         "\nID: " + id +
@@ -42,6 +40,15 @@ public class Student {
 
     public void removeBooking(Booking booking) {
         this.bookings.remove(booking);
+        ArrayList<Notification> notificationsToRemove = new ArrayList<>(); // Also removing notifications corresponding to cancelled booking
+        for(Notification n : getNotifications()){
+            if(n.getBooking() == booking){
+                notificationsToRemove.add(n);
+            }
+        }
+        for(Notification n : notificationsToRemove){
+            removeNotifications(n);
+        }
     }
 
     public HashSet<Booking> getBookings() {

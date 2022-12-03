@@ -57,7 +57,8 @@ public class LoginPage implements LoginFeatures{
         catch(UserAlreadyExistsException e){
             System.out.println(e.getMessage());
             System.out.println("Would you like to try again?(0/1)");
-            if (Integer.parseInt(sc.nextLine()) == 1) {
+            int ch = Integer.parseInt(sc.nextLine());
+            if (ch == 1) {
                 this.register();
             }
             else{

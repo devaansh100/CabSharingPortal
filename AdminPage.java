@@ -12,7 +12,6 @@ public class AdminPage implements AdminFeatures {
             System.out.println("===============================");
         }
     }
-
     public void viewAllBookings(){
         HashMap<Integer, Booking> bookings = BookingDb.getBookings();
         if(bookings.size() == 0){

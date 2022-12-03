@@ -17,9 +17,13 @@ public class BookingDb {
     public static HashMap<Integer, Booking> getBookings() {
         return bookings;
     }
+
+    public static int getBookingNumber() {
+        return BookingNumber++;
+    }
+
     public static void addBooking(Booking booking){
         if (!bookings.containsValue(booking)) {
-            booking.setBookingId(BookingNumber++);
             bookings.put(booking.getBookingId(), booking);
         }
     }
