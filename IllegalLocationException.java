@@ -1,4 +1,4 @@
-public class IllegalLocationException extends Exception {
+public class IllegalLocationException extends IllegalInputException {
     public IllegalLocationException(String s) {
         super(s);
     }

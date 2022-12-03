@@ -1,5 +1,5 @@
-enum Origin {
+enum Origin{
+    DELHI,
     PILANI,
-    JAIPUR,
-    DELHI
+    JAIPUR
 }

@@ -1,5 +1,5 @@
 enum Destination {
+    DELHI,
     PILANI,
-    JAIPUR,
-    DELHI
+    JAIPUR
 }

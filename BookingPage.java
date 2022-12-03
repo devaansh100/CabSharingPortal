@@ -1,6 +1,6 @@
 import java.util.*;
-public class BookingPage {
-    public void makeBooking(Student actor) throws IllegalLocationException, CarNotAvailableException{
+public class BookingPage implements BookingFeatures {
+    public void makeBooking(Student actor) throws IllegalInputException{
         Scanner sc = new Scanner(System.in);
         System.out.println("Choose origin(P/J/D)");
         Origin origin;
@@ -64,14 +64,21 @@ public class BookingPage {
         }
         //TODO: Take better date and time input and throw relevant Exceptions
         System.out.println("Enter month(1-12)");
-        int month = Integer.parseInt(sc.nextLine());
+        int month = Integer.parseInt(sc.nextLine());;
+        if(month < 1 || month > 12)
+            throw new IllegalInputException("Month input has to be between 1 and 12.");
 
         System.out.println("Enter day(1-30)");
         int day = Integer.parseInt(sc.nextLine());
+        if(day < 1 || day > 30)
+            throw new IllegalInputException("Day input has to be between 1 and 30.");
 
         System.out.println("Enter time(HH:MM)");
         String time = sc.nextLine();
         String[] arr = time.split(":");
+        if(arr.length != 2)
+            throw new IllegalInputException("Incorrect input format for time.");
+
         int hours = Integer.parseInt(arr[0]);
         int mins = Integer.parseInt(arr[1]);
         System.out.println("Need a luggage carrier?(0/1)");
@@ -130,7 +137,7 @@ public class BookingPage {
         }
     }
 
-    public void checkNotifications(Student actor){
+    public void checkNotifications(Student actor) throws IllegalActionOnNotification{
         Scanner sc = new Scanner(System.in);
         ArrayList<Notification> notifications = actor.getNotifications();
         int idx = 1;
@@ -147,7 +154,7 @@ public class BookingPage {
                     int n = Integer.parseInt(sc.nextLine());
                     notification = notifications.get(n - 1);
                     if (!notification.isInteractable()) {
-                        System.out.println("Invalid notification - nothing to interact!");
+                        new IllegalActionOnNotification("Invalid notification - nothing to interact!");
                         checkNotifications(actor);
                         break;
                     }
@@ -171,7 +178,7 @@ public class BookingPage {
                     if (!notification.isInteractable())
                         actor.removeNotifications(notification);
                     else
-                        System.out.println("Cannot delete notification since you have not interacted with it");
+                        new IllegalActionOnNotification("Cannot delete notification since you have not interacted with it");
                     break;
             }
         }

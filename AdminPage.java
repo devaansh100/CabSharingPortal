@@ -1,5 +1,5 @@
 import java.util.*;
-public class AdminPage {
+public class AdminPage implements AdminFeatures {
     public void viewAllStudentDetails(){
         HashMap<String, Student> details = StudentDb.getDetails();
         if(details.size() == 0){

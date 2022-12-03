@@ -58,7 +58,7 @@ public class Application extends Thread{
                             try {
                                 bookingPage.makeBooking(student);
                             }
-                            catch(IllegalLocationException | CarNotAvailableException e){
+                            catch(IllegalInputException e){
                                 System.out.println(e.getMessage());
                                 continue;
                             }
@@ -67,7 +67,12 @@ public class Application extends Thread{
                             bookingPage.viewBookings(student);
                             break;
                         case 3:
-                            bookingPage.checkNotifications(student);
+                            try {
+                                bookingPage.checkNotifications(student);
+                            }
+                            catch(IllegalActionOnNotification e){
+                                System.out.println(e.getMessage());
+                            }
                             break;
                     }
                 }

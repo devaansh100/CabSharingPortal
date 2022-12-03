@@ -10,19 +10,6 @@ public class Booking {
     private int bookingId;
     private boolean status, paid, cabSharing;
 
-    public String toString() {
-        String repr = bookingId + ": Trip from " + src + " to " + dest + " in " + car + " on " + day + "/" + month + " at " + hours + ":" + mins +
-                ". Passengers are ";
-        for(Student s : passengers){
-            String student_repr = s.getName() + "(" + s.getId() + ")";
-            repr = repr + student_repr + ", ";
-        }
-        String status = this.status ? "CONFIRMED" : "PROPOSED";
-        String paid = this.paid ? "PAID - NO REFUND" : "NOT PAID";
-        repr = repr.substring(0, repr.length() - 1) + ". | " + status + " | " + paid;
-        return repr;
-    }
-
     public Booking(Origin src, Destination dest, int month, int day, int hours, int mins, Car car, boolean carrier) {
         this.src = src;
         this.dest = dest;
@@ -38,6 +25,18 @@ public class Booking {
         this.status = false;
         this.paid = false;
         this.cabSharing = true;
+    }
+    public String toString() {
+        String repr = bookingId + ": Trip from " + src + " to " + dest + " in " + car + " on " + day + "/" + month + " at " + hours + ":" + mins +
+                ". Passengers are ";
+        for(Student s : passengers){
+            String student_repr = s.getName() + "(" + s.getId() + ")";
+            repr = repr + student_repr + ", ";
+        }
+        String status = this.status ? "CONFIRMED" : "PROPOSED";
+        String paid = this.paid ? "PAID - NO REFUND" : "NOT PAID";
+        repr = repr.substring(0, repr.length() - 1) + ". | " + status + " | " + paid;
+        return repr;
     }
 
     public Origin getSrc() {

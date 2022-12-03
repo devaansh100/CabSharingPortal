@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class LoginPage {
+public class LoginPage implements LoginFeatures{
     private boolean isLoggedIn = false, isAdmin = false;
     private Student student;
     private final String admin_username, admin_password;
