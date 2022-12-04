@@ -15,7 +15,7 @@ public class LoginPage implements LoginFeatures{
         System.out.println("Enter Password");
         String password = sc.nextLine();
         try{
-            student = StudentDb.queryDetails(username);
+            student = Db.StudentDb.query(username);
             this.verify(username, password);
         }
         catch(UsernameDoesNotExistException e) {
@@ -38,7 +38,7 @@ public class LoginPage implements LoginFeatures{
     }
 
     private boolean verify(String username, String password) throws IncorrectPasswordException, UsernameDoesNotExistException{
-        String db_password = StudentDb.queryPassword(username);
+        String db_password = Db.PasswordDb.query(username);
         this.isLoggedIn = db_password.equals(password);
         if(!this.isLoggedIn){
             throw new IncorrectPasswordException("Wrong password entered for this user!");//TODO: Define this exception
@@ -52,7 +52,7 @@ public class LoginPage implements LoginFeatures{
         System.out.println("Enter Password");
         String password = sc.nextLine();
         try {
-            StudentDb.addToPasswords(username, password);
+            Db.PasswordDb.add(username, password);
         }
         catch(UserAlreadyExistsException e){
             System.out.println(e.getMessage());
@@ -73,18 +73,18 @@ public class LoginPage implements LoginFeatures{
         System.out.println("Enter Your Email Address");
         String email = sc.nextLine();
         try {
-            StudentDb.addDetails(username, name, contactNumber, email);
+            Db.StudentDb.add(username, new Student(username, name, contactNumber, email));
         }
         catch (UserAlreadyExistsException e) {
-            //ignored. guaranteed unique user since we've already done that check
+            System.out.println(e.getMessage());//However, we can never reach here
         }
         System.out.println("Successfully Registered!");
         this.isLoggedIn = true;
         try {
-            student = StudentDb.queryDetails(username);
+            student = Db.StudentDb.query(username);
         }
         catch (UsernameDoesNotExistException e) {
-            //ignored, since we know username exists because we just added it
+            System.out.println(e.getMessage());//However, we can never reach here
         }
         return true;
     }

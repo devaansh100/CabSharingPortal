@@ -25,7 +25,7 @@ public class Booking {
         this.status = false;
         this.paid = false;
         this.cabSharing = true;
-        this.bookingId = BookingDb.getBookingNumber();
+        this.bookingId = Db.BookingDb.getBookingNumber();
     }
     public String toString() {
         String repr = bookingId + ": Trip from " + src + " to " + dest + " in " + car + " on " + day + "/" + month + " at " + hours + ":" + mins +
@@ -152,7 +152,7 @@ public class Booking {
             s.addNotifications(new Notification("Trip " + getBookingId() + ": " + s.getName() + " has rejected the trip."));
         }
         if(this.passengers.size() == 0){
-            BookingDb.removeBooking(this);
+            Db.BookingDb.remove(this.getBookingId());
         }
         this.updateStatus();
     }

@@ -1,7 +1,7 @@
 import java.util.*;
 public class AdminPage implements AdminFeatures {
     public void viewAllStudentDetails(){
-        HashMap<String, Student> details = StudentDb.getDetails();
+        HashMap<String, Student> details = Db.StudentDb.get();
         if(details.size() == 0){
             System.out.println("No students to show!");
             return;
@@ -13,7 +13,7 @@ public class AdminPage implements AdminFeatures {
         }
     }
     public void viewAllBookings(){
-        HashMap<Integer, Booking> bookings = BookingDb.getBookings();
+        HashMap<Integer, Booking> bookings = Db.BookingDb.get();
         if(bookings.size() == 0){
             System.out.println("No bookings to show!");
             return;
@@ -37,7 +37,7 @@ public class AdminPage implements AdminFeatures {
     }
     public void sendPayments(){
         Scanner sc = new Scanner(System.in);
-        HashMap<Integer, Booking> bookings = BookingDb.getBookings();
+        HashMap<Integer, Booking> bookings = Db.BookingDb.get();
         if(bookings.size() == 0){
             System.out.println("No confirmed bookings yet!");
             return;

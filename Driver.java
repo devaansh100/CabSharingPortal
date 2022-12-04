@@ -10,6 +10,7 @@ public class Driver {
         catch(Exception e){
             e.printStackTrace();
         }
+
         while (input != 2) {
             System.out.println("Choose 1 for login, 2 to close application");
             input = Integer.parseInt(sc.nextLine());

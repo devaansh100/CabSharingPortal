@@ -93,12 +93,12 @@ public class BookingPage implements BookingFeatures {
         }
         booking.addPassengers(actor);
         actor.addBooking(booking);
-        BookingDb.addBooking(booking);
+        Db.BookingDb.add(booking.getBookingId(), booking);
         System.out.println("Booking successful!");
     }
     public Booking makeCabSharingBooking(Booking currentBooking){
         Scanner sc = new Scanner(System.in);
-        ArrayList<Booking> bookings = BookingDb.getRelevantBookings(currentBooking);
+        ArrayList<Booking> bookings = Db.BookingDb.getRelevantBookings(currentBooking);
         if(bookings.size() == 0){
             System.out.println("No cabs to share!");
             return currentBooking;

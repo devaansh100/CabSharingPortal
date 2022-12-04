@@ -46,22 +46,22 @@ public class DummyData {
             System.out.println("Password: " + password);
             System.out.println("--------------------------");
             usernames.add(id);
-            StudentDb.addDetails(id, name, phone, email);
-            StudentDb.addToPasswords(id, password);
+            Db.StudentDb.add(id, new Student(id, name, phone, email));
+            Db.PasswordDb.add(id, password);
             ArrayList<Integer> locs = multipleUniqueNumbers(1, 3, 2);
             ArrayList<Integer> car = multipleUniqueNumbers(1, 4, 1);
             Booking b = new Booking(origins.get(locs.get(0)), dests.get(locs.get(1)), getRandomNumber(11, 12), getRandomNumber(1, 2), getRandomNumber(11, 12), getRandomNumber(15, 45), cars.get(car.get(0)), getRandomNumber(0, 1) == 1);
-            Student s = StudentDb.queryDetails(id);
+            Student s = Db.StudentDb.query(id);
             b.addPassengers(s);
             s.addBooking(b);
             for(int j = 1; j <= 3; j++) {
                 if (getRandomNumber(1, 4) == 2) {
-                    Student newS = StudentDb.queryDetails(usernames.get(getRandomNumber(0, usernames.size() - 2)));
+                    Student newS = Db.StudentDb.query(usernames.get(getRandomNumber(0, usernames.size() - 2)));
                     b.addPassengers(newS);
                     newS.addBooking(b);
                 }
             }
-            BookingDb.addBooking(b);
+            Db.BookingDb.add(b.getBookingId(), b);
         }
     }
 }
