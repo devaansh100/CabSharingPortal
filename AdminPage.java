@@ -52,6 +52,10 @@ public class AdminPage implements AdminFeatures {
                 System.out.println("===============================");
             }
         }
+        if(confirmedBookings.size() == 0){
+            System.out.println("No confirmed and unpaid bookings yet!");
+            return;
+        }
         System.out.println("Give a space separated list of serial numbers to send payments to those bookings, put -1 to send to all bookings");
         String ch = sc.nextLine();
         String arr[] = ch.split(" ");
