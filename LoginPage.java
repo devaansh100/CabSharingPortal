@@ -29,7 +29,7 @@ public class LoginPage implements LoginFeatures{
             System.out.println(e.getMessage());
             System.out.println("Would you like to try again?(0/1)");
             if(Integer.parseInt(sc.nextLine()) == 1) {
-                this.login();
+                return this.login();
             }
         }
         if(this.isLoggedIn)
@@ -59,8 +59,7 @@ public class LoginPage implements LoginFeatures{
             System.out.println("Would you like to try again?(0/1)");
             int ch = Integer.parseInt(sc.nextLine());
             if (ch == 1) {
-                this.register();
-                return this.isLoggedIn;
+                return this.register();
             }
             else{
                 this.isLoggedIn = false;
@@ -107,7 +106,7 @@ public class LoginPage implements LoginFeatures{
             System.out.println(e.getMessage());
             System.out.println("Would you like to try again?(0/1)");
             if(Integer.parseInt(sc.nextLine()) == 1) {
-                this.admin();
+                rerturn this.admin();
             }
         }
         this.isAdmin = this.isLoggedIn;
