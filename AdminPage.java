@@ -46,7 +46,7 @@ public class AdminPage implements AdminFeatures {
         int idx = 0;
         for(Map.Entry m : bookings.entrySet()){
             Booking b = (Booking) m.getValue();
-            if(b.isStatus()) {
+            if(b.isStatus() && !b.isPaid()) {
                 confirmedBookings.add(b);
                 System.out.println(idx++ + ") " + b.toString());
                 System.out.println("===============================");
