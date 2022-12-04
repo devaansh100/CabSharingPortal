@@ -164,4 +164,8 @@ public class Booking {
     public void setPaid(){
         this.paid = true;
     }
+
+    public boolean isCabSharing() {
+        return cabSharing;
+    }
 }

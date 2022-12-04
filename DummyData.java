@@ -36,7 +36,7 @@ public class DummyData {
         cars.put(4, Car.AC_SEDAN);
 
         ArrayList<String> usernames = new ArrayList<>();
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 5; i++){
             name = data.name().firstName();
             id = name + data.bothify("##");
             email = name + "@" + data.company().name() + ".com";
