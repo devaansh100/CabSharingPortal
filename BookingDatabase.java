@@ -53,6 +53,7 @@ public class BookingDatabase implements Database<Integer, Booking> {
         }
         checkIfIsRelevant = true;
         // Then check if bookings after this time can be shared
+        current = booking;
         while(checkIfIsRelevant) {
             current = sortedBookings.higher(current);
             if(current != null && current.isRelevant(booking)) {
