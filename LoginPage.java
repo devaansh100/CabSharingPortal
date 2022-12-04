@@ -60,6 +60,7 @@ public class LoginPage implements LoginFeatures{
             int ch = Integer.parseInt(sc.nextLine());
             if (ch == 1) {
                 this.register();
+                return this.isLoggedIn;
             }
             else{
                 this.isLoggedIn = false;
